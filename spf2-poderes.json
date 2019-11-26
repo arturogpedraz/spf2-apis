@@ -1,0 +1,1201 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "SPF2 - Sociedades y Poderes API",
+    "version" : "1.0.0",
+    "title" : "SPF2 - Sociedades y Poderes API",
+    "contact" : {
+      "email" : "agpedraza@minsait.com"
+    }
+  },
+  "tags" : [ {
+    "name" : "Escritura de poder",
+    "description" : "Escritura de poder"
+  }, {
+    "name" : "Poder",
+    "description" : "Poderes"
+  }, {
+    "name" : "Grupos de Mandatarios",
+    "description" : "Grupos de Mandatarios"
+  }, {
+    "name" : "Formas de Actuar",
+    "description" : "Formas de actuar"
+  }, {
+    "name" : "Facultades de un poder",
+    "description" : "Facultades de un poder"
+  }, {
+    "name" : "Consulta de poder",
+    "description" : "Consulta de poder"
+  } ],
+  "paths" : {
+    "/faculty/abilities" : {
+      "get" : {
+        "tags" : [ "Consulta de poder" ],
+        "summary" : "CU0XX: Gets a list of faculty abilities for the given criteria",
+        "operationId" : "findFacultyAbilitiesByCriteria",
+        "description" : "CU0XX: Gets a list of faculty abilities for the given criteria",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "powerId",
+          "description" : "powerId criteria",
+          "type" : "string",
+          "required" : false
+        }, {
+          "in" : "query",
+          "name" : "date",
+          "description" : "search date",
+          "type" : "number",
+          "format" : "timestamp",
+          "required" : false
+        }, {
+          "in" : "query",
+          "name" : "badgetId",
+          "description" : "badgetId filter",
+          "type" : "number",
+          "required" : false
+        }, {
+          "in" : "query",
+          "name" : "sourceAccountId",
+          "description" : "sourceAccointId for filter",
+          "type" : "string",
+          "required" : false
+        }, {
+          "in" : "query",
+          "name" : "amount",
+          "description" : "amount to be filtered",
+          "type" : "number",
+          "required" : false
+        }, {
+          "in" : "query",
+          "name" : "sourceAccountNumber",
+          "description" : "destination account number",
+          "type" : "string",
+          "required" : false
+        }, {
+          "in" : "query",
+          "name" : "sourceAccountBankId",
+          "description" : "destination account bankId",
+          "type" : "string",
+          "required" : false
+        }, {
+          "in" : "query",
+          "name" : "sourceAccountRut",
+          "description" : "destination account RUT",
+          "type" : "string",
+          "required" : false
+        }, {
+          "in" : "query",
+          "name" : "relatedCompanyAccountNumber",
+          "description" : "Related Commpany account number",
+          "type" : "string",
+          "required" : false
+        }, {
+          "in" : "query",
+          "name" : "relatedCompanyAccountRut",
+          "description" : "Related Commpany RUT",
+          "type" : "string",
+          "required" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Result list",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/VmFacultyAbility"
+              }
+            }
+          },
+          "204" : {
+            "description" : "no results"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          }
+        }
+      }
+    },
+    "/mandatary" : {
+      "get" : {
+        "tags" : [ "Consulta de poder" ],
+        "summary" : "CUXX: consulta de poder",
+        "operationId" : "findMandatariesByCriteria",
+        "description" : "CUXX: consulta de poder",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "rut",
+          "description" : "rut of the society",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "query",
+          "name" : "active",
+          "description" : "sets if returned mandataries must be active or not",
+          "required" : true,
+          "type" : "boolean"
+        }, {
+          "in" : "query",
+          "name" : "name",
+          "description" : "filter mandataries by name",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Result list",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/VmPowerOfAttorney"
+              }
+            }
+          },
+          "204" : {
+            "description" : "no results"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          }
+        }
+      }
+    },
+    "/powerOfAttorney" : {
+      "get" : {
+        "tags" : [ "Escritura de poder" ],
+        "summary" : "CU061: Gets a list of power of attorneis matching criteria",
+        "operationId" : "findPowerOfAttorneis",
+        "description" : "CU061: Gets a list of power of attorneis matching criteria",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "powerOfAttorneyNumber",
+          "description" : "powerOfAttorneiNumber",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "in" : "query",
+          "name" : "dateFrom",
+          "description" : "starting date criteria",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "in" : "query",
+          "name" : "dateTo",
+          "description" : "end dat criteria",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "in" : "query",
+          "name" : "rut",
+          "description" : "rut of the socieyt",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Result list",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/VmPowerOfAttorney"
+              }
+            }
+          },
+          "204" : {
+            "description" : "no results"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Escritura de poder" ],
+        "summary" : "CU037: Creates a Power of Attorney",
+        "operationId" : "createPowerOfattorney",
+        "description" : "CU037: Creates a Power of Attorney",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "legalDocument",
+          "description" : "LegalDocuments to revoke",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/VmPowerOfAttorney"
+            }
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "headers" : {
+              "X-LegalDocumentId" : {
+                "type" : "number",
+                "description" : "PowerId of the created"
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          }
+        }
+      }
+    },
+    "/powerOfAttorney/{powerOfAttorneiId}" : {
+      "get" : {
+        "tags" : [ "Escritura de poder" ],
+        "summary" : "CU033: get a Power of attorneyById",
+        "operationId" : "getPowerOfAttornei",
+        "description" : "CU033: get a Power of attorneyById",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "powerOfAttorneiId",
+          "description" : "ID of the poa",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/VmPowerOfAttorney"
+            }
+          },
+          "404" : {
+            "description" : "not found"
+          },
+          "400" : {
+            "description" : "bad input"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Escritura de poder" ],
+        "summary" : "CU033: Revokes a list of Power of attorneis",
+        "operationId" : "revokePowerOfAttornei",
+        "description" : "CU033: Revokes a list of Power of attorneis",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "legalDocument",
+          "description" : "LegalDocuments to revoke",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/VmPowerOfAttorney"
+            }
+          }
+        }, {
+          "in" : "path",
+          "name" : "powerOfAttorneiId",
+          "description" : "PowerOfAttorneiToModifyOrRevoke",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "query",
+          "name" : "revoke",
+          "description" : "sets if its a revocation operation or not",
+          "required" : true,
+          "type" : "boolean"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Reovoked"
+          },
+          "404" : {
+            "description" : "not found"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          }
+        }
+      }
+    },
+    "/power" : {
+      "get" : {
+        "tags" : [ "Poder" ],
+        "summary" : "CU037: Gets a list of powers matching criteria",
+        "operationId" : "findPower",
+        "description" : "CU037: Gets a list of powers matching criteria",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "powerOfAttorneiId",
+          "description" : "powerOfAttorneiId to be filtered by",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "query",
+          "name" : "rut",
+          "description" : "rut of the socieyt",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Result list",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/VmPower"
+              }
+            }
+          },
+          "204" : {
+            "description" : "no results"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Poder" ],
+        "summary" : "CU037: Creates a power",
+        "operationId" : "createPower",
+        "description" : "CU037: Creates a power",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "power",
+          "description" : "power to be created",
+          "schema" : {
+            "$ref" : "#/definitions/VmPower"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "headers" : {
+              "X-PowerId" : {
+                "type" : "number",
+                "description" : "PowerId of the created"
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          }
+        }
+      }
+    },
+    "/power/{powerId}" : {
+      "get" : {
+        "tags" : [ "Poder" ],
+        "summary" : "CU033: get a Power by powerId",
+        "operationId" : "getPower",
+        "description" : "CU033: get a Power by powerId",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "powerId",
+          "description" : "ID of the power",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/VmPower"
+            }
+          },
+          "404" : {
+            "description" : "not found"
+          },
+          "400" : {
+            "description" : "bad input param"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Poder" ],
+        "summary" : "CU049, CU050, CU051: modifies a power: limits, observations and agreements",
+        "operationId" : "modifyPower",
+        "description" : "CU049, CU050, CU051: modifies a power: limits, observations and agreements",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "powerId",
+          "description" : "power id to be modified",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "power",
+          "description" : "Power data be modified",
+          "schema" : {
+            "$ref" : "#/definitions/VmPower"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Poder" ],
+        "summary" : "CUXX: Revokes a power",
+        "operationId" : "revokePower",
+        "description" : "CUXX: Revokes a power",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "powerId",
+          "description" : "power id to be modified",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          },
+          "404" : {
+            "description" : "not found"
+          }
+        }
+      }
+    },
+    "/mandatoryGroup" : {
+      "get" : {
+        "tags" : [ "Grupos de Mandatarios" ],
+        "summary" : "CU038: Gets a mandatory group list matching criteria",
+        "operationId" : "findMandatoryGroup",
+        "description" : "CU038: Gets a mandatory group list matching criteria",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "societyId",
+          "description" : "societyId criteria",
+          "type" : "string",
+          "required" : true
+        }, {
+          "in" : "query",
+          "name" : "powerId",
+          "description" : "powerId criteria",
+          "type" : "string",
+          "required" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Result list",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/VmMandatoryGroup"
+              }
+            }
+          },
+          "204" : {
+            "description" : "no results"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Grupos de Mandatarios" ],
+        "summary" : "CU038: Creates a mandatory group",
+        "operationId" : "createMandatoryGroup",
+        "description" : "CU038: Creates a mandatory group",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "mandatoryGroup",
+          "description" : "MandatoryGroup to be created",
+          "schema" : {
+            "$ref" : "#/definitions/VmMandatoryGroup"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "headers" : {
+              "X-MandatoryGroupId" : {
+                "type" : "number",
+                "description" : "MandatoryGroupId of the created group"
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          }
+        }
+      }
+    },
+    "/mandatoryGroup/{mandatoryGroupId}" : {
+      "get" : {
+        "tags" : [ "Grupos de Mandatarios" ],
+        "summary" : "CU033: gets a Mandatary group by id",
+        "operationId" : "getMandatoryGroup",
+        "description" : "CU033: gets a Mandatary group by id",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "mandatoryGroupId",
+          "description" : "ID of the Mandatary group",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/VmMandatoryGroup"
+            }
+          },
+          "404" : {
+            "description" : "not found"
+          },
+          "400" : {
+            "description" : "bad input param"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Grupos de Mandatarios" ],
+        "summary" : "CU049, CU050, CU051: modifies a power: limits, observations and agreements",
+        "operationId" : "modifyMandatoryGroup",
+        "description" : "CU049, CU050, CU051: modifies a power: limits, observations and agreements",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "mandatoryGroupId",
+          "description" : "ID of the Mandatary group to be modified",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "power",
+          "description" : "Mandatary group data be modified",
+          "schema" : {
+            "$ref" : "#/definitions/VmMandatoryGroup"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          },
+          "404" : {
+            "description" : "not found"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Grupos de Mandatarios" ],
+        "summary" : "CUXXX: Deletes a mandatary group",
+        "operationId" : "deleteMandatoryGroup",
+        "description" : "CUXXX: Deletes a mandatary group",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "mandatoryGroupId",
+          "description" : "ID of the Mandatary group to be modified",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          },
+          "404" : {
+            "description" : "not found"
+          }
+        }
+      }
+    },
+    "/wayOfActing" : {
+      "get" : {
+        "tags" : [ "Formas de Actuar" ],
+        "summary" : "CU039: Gets a list of wayOfActings matching criteria",
+        "operationId" : "findWaysOfActing",
+        "description" : "CU039: Gets a list of wayOfActings matching criteria",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "powerId",
+          "description" : "powerId criteria",
+          "type" : "string",
+          "required" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Result list",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/VmWayOfActing"
+              }
+            }
+          },
+          "204" : {
+            "description" : "no results"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Formas de Actuar" ],
+        "summary" : "CU039: Creates a way of acting",
+        "operationId" : "createWayOfActing",
+        "description" : "CU039: Creates a way of acting",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "wayOfActing",
+          "description" : "Way Of Acting to be created",
+          "schema" : {
+            "$ref" : "#/definitions/VmWayOfActing"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "headers" : {
+              "X-WayOfActingId" : {
+                "type" : "number",
+                "description" : "WayOfActingId of the created entity"
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          }
+        }
+      }
+    },
+    "/wayOfActing/{wayOfActingId}" : {
+      "get" : {
+        "tags" : [ "Formas de Actuar" ],
+        "summary" : "CU033: gets a way of acting by id",
+        "operationId" : "getWayOfActing",
+        "description" : "CU033: gets a way of acting by id",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "wayOfActingId",
+          "description" : "ID of the way of acting",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/VmWayOfActing"
+            }
+          },
+          "404" : {
+            "description" : "not found"
+          },
+          "400" : {
+            "description" : "bad parameter"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Formas de Actuar" ],
+        "summary" : "CUXXX: modifies a way of acting",
+        "operationId" : "modifyWayOfActing",
+        "description" : "CUXXX: modifies a way of acting",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "wayOfActingId",
+          "description" : "ID of the way of acting to be modified",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "power",
+          "description" : "The way of acting data be modified",
+          "schema" : {
+            "$ref" : "#/definitions/VmWayOfActing"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          },
+          "404" : {
+            "description" : "NOT FOUND"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Formas de Actuar" ],
+        "summary" : "CUXXX: deletes a way of acting",
+        "operationId" : "deletesWayOfActing",
+        "description" : "CUXXX: deletes a way of acting",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "wayOfActingId",
+          "description" : "ID of the way of acting to be modified",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          },
+          "404" : {
+            "description" : "NOT FOUND"
+          }
+        }
+      }
+    },
+    "/faculty/restriction" : {
+      "get" : {
+        "tags" : [ "Facultades de un poder" ],
+        "summary" : "CU0XX: Gets a list of faculty restrictions for the given power",
+        "operationId" : "findFacultyRestrictions",
+        "description" : "CU0XX: Gets a list of faculty restrictions for the given power",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "powerId",
+          "description" : "powerId criteria",
+          "type" : "string",
+          "required" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Result list",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/VmFacultyRestriction"
+              }
+            }
+          },
+          "204" : {
+            "description" : "no results"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Facultades de un poder" ],
+        "summary" : "CU0XX: Creates a new restriction",
+        "operationId" : "createFacultyRestriction",
+        "description" : "CU0XX: Creates a new restriction",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "facultyRestriction",
+          "description" : "Restriction to be created",
+          "schema" : {
+            "$ref" : "#/definitions/VmFacultyRestriction"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "headers" : {
+              "X-FacultyRestrictionId" : {
+                "type" : "number",
+                "description" : "FacultyRestrictionId of the created entity"
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          }
+        }
+      }
+    },
+    "/faculty/restriction/{facultyRestrictionId}" : {
+      "get" : {
+        "tags" : [ "Facultades de un poder" ],
+        "summary" : "CU0XX: Gets a restriction from Id",
+        "operationId" : "getFacultyRestriction",
+        "description" : "CU0XX: Gets a restriction from Id",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "facultyRestrictionId",
+          "description" : "ID of the restriction",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/VmFacultyRestriction"
+            }
+          },
+          "404" : {
+            "description" : "not found"
+          },
+          "400" : {
+            "description" : "bad input"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Facultades de un poder" ],
+        "summary" : "CU0XX: modify a restriction from Id",
+        "operationId" : "modifyFacultyRestriction",
+        "description" : "CU0XX: modify a restriction from Id",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "facultyRestrictionId",
+          "description" : "ID of the way of acting to be modified",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "facultyRestriction",
+          "description" : "The restriction data be modified",
+          "schema" : {
+            "$ref" : "#/definitions/VmFacultyRestriction"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "404" : {
+            "description" : "NOT FOUND"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Facultades de un poder" ],
+        "summary" : "CU0XX: deletes a restriction from Id",
+        "operationId" : "deleteFacultyRestriction",
+        "description" : "CU0XX: modify a restriction from Id",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "facultyRestrictionId",
+          "description" : "ID of the way of acting to be modified",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "404" : {
+            "description" : "NOT FOUND"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "VmFacultyAbility" : {
+      "type" : "object",
+      "required" : [ "id" ],
+      "properties" : {
+        "id" : {
+          "type" : "number",
+          "format" : "int32",
+          "example" : 12
+        },
+        "faculty" : {
+          "$ref" : "#/definitions/VmFacultyRestriction"
+        },
+        "wayOfActings" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/VmWayOfActing"
+          }
+        }
+      }
+    },
+    "VmFacultyRestriction" : {
+      "type" : "object",
+      "required" : [ "id" ],
+      "properties" : {
+        "id" : {
+          "type" : "number",
+          "format" : "int32",
+          "example" : 12
+        },
+        "facultyId" : {
+          "type" : "number",
+          "format" : "int32",
+          "example" : 121231
+        },
+        "badgeRestrictionId" : {
+          "type" : "number",
+          "format" : "int32",
+          "example" : 121231
+        },
+        "amountRestriction" : {
+          "type" : "number",
+          "format" : "int32",
+          "example" : 121231
+        },
+        "sourceAccountNumberRestrictionId" : {
+          "type" : "number",
+          "format" : "int32",
+          "example" : 121231
+        },
+        "destinationAccountNumberRestrictionId" : {
+          "type" : "number",
+          "format" : "int32",
+          "example" : 121231
+        },
+        "textRestriction" : {
+          "type" : "string",
+          "example" : "no puede  realizar adeudos a cuenta"
+        },
+        "power" : {
+          "$ref" : "#/definitions/VmPower"
+        }
+      }
+    },
+    "VmWayOfActing" : {
+      "type" : "object",
+      "required" : [ "id" ],
+      "properties" : {
+        "id" : {
+          "type" : "number",
+          "format" : "int32",
+          "example" : 12
+        },
+        "name" : {
+          "type" : "string",
+          "example" : "A89171A"
+        },
+        "relatedMandataryGroup" : {
+          "$ref" : "#/definitions/VmMandatoryGroup"
+        },
+        "numberOfMandataries" : {
+          "type" : "integer"
+        },
+        "numberOfAuthorizedSignatures" : {
+          "type" : "integer"
+        },
+        "power" : {
+          "$ref" : "#/definitions/VmPower"
+        }
+      }
+    },
+    "VmMandatoryGroup" : {
+      "type" : "object",
+      "required" : [ "id", "name", "relatedPower" ],
+      "properties" : {
+        "id" : {
+          "type" : "number",
+          "format" : "int32",
+          "example" : 12
+        },
+        "name" : {
+          "type" : "string",
+          "example" : "A89171A"
+        },
+        "status" : {
+          "type" : "string",
+          "example" : "A89171A"
+        },
+        "power" : {
+          "$ref" : "#/definitions/VmPower"
+        },
+        "mandataries" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/VmMandatary"
+          }
+        }
+      }
+    },
+    "VmMandatary" : {
+      "type" : "object",
+      "required" : [ "id" ],
+      "properties" : {
+        "id" : {
+          "type" : "number",
+          "format" : "int32",
+          "example" : 12
+        },
+        "rutNumber" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "surname" : {
+          "type" : "string"
+        },
+        "secondSurname" : {
+          "type" : "string"
+        }
+      }
+    },
+    "VmPower" : {
+      "type" : "object",
+      "required" : [ "id", "rutNumber", "sglNumber" ],
+      "properties" : {
+        "id" : {
+          "type" : "number",
+          "format" : "int32",
+          "example" : 12
+        },
+        "powerOfAttorney" : {
+          "$ref" : "#/definitions/VmPowerOfAttorney"
+        },
+        "rutNumber" : {
+          "type" : "string"
+        },
+        "sglNumber" : {
+          "type" : "string"
+        },
+        "initDate" : {
+          "format" : "timestamp",
+          "example" : 12312454412531
+        },
+        "endDate" : {
+          "format" : "timestamp",
+          "example" : 12312454412531
+        },
+        "mandataryGroups" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/VmPower"
+          }
+        },
+        "waysOfActing" : {
+          "items" : {
+            "$ref" : "#/definitions/VmWayOfActing"
+          }
+        },
+        "facultyRestriction" : {
+          "items" : {
+            "$ref" : "#/definitions/VmFacultyRestriction"
+          }
+        }
+      }
+    },
+    "VmPowerOfAttorney" : {
+      "type" : "object",
+      "required" : [ "id" ],
+      "properties" : {
+        "id" : {
+          "type" : "number",
+          "format" : "int32",
+          "example" : 12
+        },
+        "rut" : {
+          "type" : "string",
+          "example" : "79.785.590-1"
+        },
+        "powerType" : {
+          "enum" : [ "PODER", "PODER_ESPECIAL" ]
+        },
+        "validityDateInit" : {
+          "type" : "string",
+          "format" : "timestamp",
+          "example" : 12312454412531
+        },
+        "validityDateEnd" : {
+          "type" : "string",
+          "format" : "timestamp",
+          "example" : 12312454412531
+        },
+        "scriptDate" : {
+          "type" : "string",
+          "format" : "timestamp",
+          "example" : 12312454412531
+        },
+        "notary" : {
+          "$ref" : "#/definitions/VmNotary"
+        },
+        "script" : {
+          "$ref" : "#/definitions/VmScript"
+        },
+        "recordNumber" : {
+          "type" : "string",
+          "example" : "123123E"
+        },
+        "legalStatus" : {
+          "type" : "string"
+        },
+        "observations" : {
+          "type" : "string"
+        },
+        "powerOfAttorney" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/VmPower"
+          }
+        }
+      }
+    },
+    "VmScript" : {
+      "type" : "object",
+      "properties" : {
+        "scriptType" : {
+          "enum" : [ "PUBLIC_DEED", "PRIVATE_INSTRUMENT", "PUBLIC_INSTRUMENT" ]
+        },
+        "repertoryNumber" : {
+          "type" : "string"
+        },
+        "protocolNumber" : {
+          "type" : "string"
+        },
+        "protocolDate" : {
+          "format" : "timestamp",
+          "example" : 1231245441253112
+        }
+      }
+    },
+    "VmNotary" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "number",
+          "format" : "int32",
+          "example" : 12
+        },
+        "label" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "host" : "virtserver.swaggerhub.com",
+  "basePath" : "/arturogpedraz/spf2-sociedad/1.0.0",
+  "schemes" : [ "https" ]
+}
